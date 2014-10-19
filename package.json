@@ -1,0 +1,39 @@
+{
+  "name": "habular",
+  "version": "0.0.1",
+  "author": "biril <alexlambiris@gmail.com>",
+  "description": "Convert JS hash to an equivalent tabular data structure",
+  "contributors": [],
+  "main": "./habular.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/biril/habular"
+  },
+  "bugs": "https://github.com/biril/habular/issues",
+  "license": "MIT",
+  "keywords": [
+    "hash",
+    "table",
+    "json",
+    "util"
+  ],
+  "dependencies": {
+    "underscore": "1.7.x"
+  },
+  "devDependencies": {
+    "jasmine-node": "1.14.x",
+    "jshint": "2.5.x",
+    "docco": "0.6.x"
+  },
+  "scripts": {
+    "test": "./node_modules/.bin/jasmine-node --verbose --color ./test/spec/",
+    "lint": "jshint --show-non-errors habular.js test/spec/",
+    "doc": "docco jasq.js"
+  },
+  "engines": {
+    "node": ">=0.10"
+  },
+  "directories": {
+    "test": "test"
+  }
+}
