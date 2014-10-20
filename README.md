@@ -1,10 +1,9 @@
 Habular
 =======
 
-Although naturally viewed as a tree, contents of a JS hash are often structured in a way that a
-tabular view is both applicable and better suited to inspection. Habular defines and implements a
-conversion of hash to an equivalent data structure which may be easily rendered as a table (similar
-to the
+Although naturally viewed as a tree, a hash is often structured in a way that a tabular view is
+both applicable and better suited to inspection. Habular defines and implements a conversion of
+hash to equivalent data structure which may be easily rendered as a table (similar to the
 [`console.table` API](https://developer.chrome.com/devtools/docs/tips-and-tricks#console-table)
 found in Chrome's devtools).
 

@@ -2,7 +2,7 @@
   "name": "habular",
   "version": "0.0.1",
   "author": "biril <alexlambiris@gmail.com>",
-  "description": "Convert JS hash to equivalent tabular data structure",
+  "description": "Convert hash to equivalent tabular data structure",
   "contributors": [],
   "main": "./habular.js",
   "repository": {
