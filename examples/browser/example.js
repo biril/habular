@@ -29,6 +29,7 @@
               displayValue = cell.value;
               htmlClass = cell.type;
               switch (cell.type) {
+                case 'null': displayValue = 'null'; break;
                 case 'object': displayValue = 'object'; break;
                 case 'array': displayValue = 'array'; break;
                 case 'boolean': htmlClass += (cell.value ? ' true' : ' false');
