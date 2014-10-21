@@ -9,7 +9,45 @@ hash to equivalent data structure which may be easily rendered as a table (simil
 [`console.table` API](https://developer.chrome.com/devtools/docs/tips-and-tricks#console-table)
 found in Chrome's devtools).
 
-This is a very early revision. Further documentation is forthcoming.
+As an example, the hash
+
+```javascript
+[
+  0,
+  null,
+  ["zero" ,1],
+  {
+    name: "Alice",
+    age: 19,
+    extra: null
+  }, {
+    name: "Bob",
+    age: 23,
+    extra: {},
+    superpower: "laziness"
+  }, {
+    name: "Charles",
+    age: 27,
+    extra: [],
+    nickname: "Carlos"
+  }
+]
+```
+
+will be converted to a structure that may be visualized as
+
+
+| primitive | index0 | index1 | name      | age | extra    | superpower | nickname |
+| --------- | ------ | ------ | --------- | --- | -------- | ---------- | -------- |
+| 0         |        |        |           |     |          |            |          |
+| `null`    |        |        |           |     |          |            |          |
+|           | "zero" | 1      |           |     |          |            |          |
+|           |        |        | "Alice"   | 19  | `null`   |            |          |
+|           |        |        | "Bob"     | 23  | `object` | "laziness" |          |
+|           |        |        | "Charles" | 27  | `array`  |            | "Carlos" |
+
+
+This is a very early revision and further documentation is forthcoming.
 
 
 License
