@@ -47,6 +47,7 @@
   'use strict';
 
   var
+
     //
     table = null,
 
