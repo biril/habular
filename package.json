@@ -22,6 +22,7 @@
   },
   "devDependencies": {
     "jasmine-node": "^1.14.5",
+    "jscs": "^2.1.0",
     "jshint": "^2.8.0",
     "docco": "^0.7.0"
   },
