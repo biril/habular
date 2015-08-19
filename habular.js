@@ -2,7 +2,7 @@
 //
 //     https://github.com/biril/habular
 //     Licensed under the MIT License
-//     Copyright (c) 2014 Alex Lambiris
+//     Copyright (c) 2014-2015 Alex Lambiris
 
 /*global exports, define, require, _ */
 (function (root, createModule) {
