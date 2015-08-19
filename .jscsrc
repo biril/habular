@@ -34,9 +34,7 @@
   "requireDotNotation": true,
   "requireSpacesInForStatement": true,
   "requireSpaceBetweenArguments": true,
-  "requireCurlyBraces": [
-    "do"
-  ],
+  "requireCurlyBraces": true,
   "requireSpaceAfterKeywords": [
     "if",
     "else",
