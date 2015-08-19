@@ -55,5 +55,14 @@
   "safeContextKeyword": "_this",
   "validateLineBreaks": "LF",
   "validateQuoteMarks": "'",
-  "validateIndentation": 2
+  "validateIndentation": 2,
+  "maximumLineLength": {
+    "value": 100,
+    "allExcept": [
+      "regex",
+      "urlComments",
+      "functionSignature",
+      "require"
+    ]
+  }
 }

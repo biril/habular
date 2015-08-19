@@ -88,7 +88,8 @@
           cell = convertToCell(value);
         column || table.columns.push(column = createColumn(key, 'objectProperty'));
         column.cells[rowIndex] = cell;
-        column.isExpandable = column.isExpandable || cell.type === 'object' || cell.type === 'array';
+        column.isExpandable ||
+          (column.isExpandable = cell.type === 'object' || cell.type === 'array');
       });
     },
 
@@ -105,7 +106,8 @@
           cell = convertToCell(element);
         column || table.columns.push(column = createColumn(key, 'arrayElement'));
         column.cells[rowIndex] = cell;
-        column.isExpandable = column.isExpandable || cell.type === 'object' || cell.type === 'array';
+        column.isExpandable ||
+          (column.isExpandable = cell.type === 'object' || cell.type === 'array');
       });
     },
 
