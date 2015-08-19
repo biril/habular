@@ -37,7 +37,7 @@
     describe('when input is empty', function () {
 
       it('should generate a table that has 0 rows and 0 columns', function () {
-        var table = habular.asTable([]);
+        var table = habular.table([]);
 
         expect(table.getNumOfRows()).toBe(0); // table reports 0 rows
         expect(table.columns.length).toBe(0); // table has 0 columns
@@ -49,14 +49,14 @@
     describe('when input contains a single element', function () {
 
       it('should generate a single row and 0 columns, for input [{}]', function () {
-        var table = habular.asTable([{}]);
+        var table = habular.table([{}]);
 
         expect(table.getNumOfRows()).toBe(1); // table reports 1 row
         expect(table.columns.length).toBe(0); // table has 0 columns
       });
 
       it('should generate a single row and 1 \'cost\' column, for input [{ cost: 0 }]', function () {
-        var table = habular.asTable([{ cost: 0 }]);
+        var table = habular.table([{ cost: 0 }]);
 
         expect(table.columns.length).toBe(1);          // table has 1 column
         expect(table.columns[0].name).toBe('cost');    // table has a 'cost' column
@@ -66,7 +66,7 @@
 
       it('should generate a single row and 2 \'width\', \'height\' columns, for input [{ width: 0, height: 0 }]', function () {
         var
-          table = habular.asTable([{ width: 0, height: 0 }]),
+          table = habular.table([{ width: 0, height: 0 }]),
           wColumn = null,
           hColumn = null;
 
@@ -79,14 +79,14 @@
       });
 
       it('should generate a single row and 0 columns, for input [[]]', function () {
-        var table = habular.asTable([[]]);
+        var table = habular.table([[]]);
 
         expect(table.columns.length).toBe(0); // table has 0 columns
         expect(table.getNumOfRows()).toBe(1); // table reports 1 row
       });
 
       it('should generate a single row and 1 \'index0\' column, for input [[0]]', function () {
-        var table = habular.asTable([[0]]);
+        var table = habular.table([[0]]);
 
         expect(table.columns.length).toBe(1);          // table has 1 column
         expect(table.columns[0].name).toBe('index0');  // table has an 'index0' column
@@ -96,7 +96,7 @@
 
       it('should generate a single row and 2 \'index0\', \'index1\' columns, for input [[0, 0]]', function () {
         var
-          table = habular.asTable([[0, 0]]),
+          table = habular.table([[0, 0]]),
           index0Column = null,
           index1Column = null;
 
@@ -109,7 +109,7 @@
       });
 
       it('should generate a single row and 1 \'primitive\' column, for input [0]', function () {
-        var table = habular.asTable([0]);
+        var table = habular.table([0]);
 
         expect(table.columns.length).toBe(1);            // table has 1 column
         expect(table.columns[0].name).toBe('primitive'); // table has a 'primitive' column
@@ -123,21 +123,21 @@
     describe('when input contains N empty elements', function () {
 
       it('should generate N rows and 0 columns, for input [{}, {}]', function () {
-        var table = habular.asTable([{}, {}]);
+        var table = habular.table([{}, {}]);
 
         expect(table.columns.length).toBe(0); // table has 0 columns
         expect(table.getNumOfRows()).toBe(2); // table reports 2 rows
       });
 
       it('should generate N rows and 0 columns, for input [[], []]', function () {
-        var table = habular.asTable([[], []]);
+        var table = habular.table([[], []]);
 
         expect(table.columns.length).toBe(0); // table has 0 columns
         expect(table.getNumOfRows()).toBe(2); // table reports 2 rows
       });
 
       it('should generate N rows and 1 column \'primitive\', for input [0, 0]', function () {
-        var table = habular.asTable([0, 0]);
+        var table = habular.table([0, 0]);
 
         expect(table.columns[0].name).toBe('primitive'); // table has 1 'primitive' column
         expect(table.getNumOfRows()).toBe(2);            // table reports 2 rows
@@ -150,7 +150,7 @@
     describe('when input contains N non-empty elements', function () {
 
       it('should generate N rows and 1 \'name\' column, for input [{ name: \'Ron\' }, { name: \'Leslie\' }]', function () {
-        var table = habular.asTable([{ name: 'Ron' }, { name: 'Leslie' }]);
+        var table = habular.table([{ name: 'Ron' }, { name: 'Leslie' }]);
 
         expect(table.columns.length).toBe(1);       // table has 1 column
         expect(table.columns[0].name).toBe('name'); // table has 'name' column
@@ -163,7 +163,7 @@
 
       it('should generate N rows and 2 \'fName\', \'lName\' columns, for input [{ fName: \'Ron\', lName: \'Swanson\' }, { fName: \'Leslie\', lName: \'Knope\' }]', function () {
         var
-          table = habular.asTable([
+          table = habular.table([
             { fName: 'Ron', lName: 'Swanson' },
             { fName: 'Leslie', lName: 'Knope' }
           ]),
@@ -186,7 +186,7 @@
       });
 
       it('should generate N rows and 1 \'index0\' column, for input [[\'Ron\'], [\'Leslie\']]', function () {
-        var table = habular.asTable([['Ron'], ['Leslie']]);
+        var table = habular.table([['Ron'], ['Leslie']]);
 
         expect(table.columns.length).toBe(1);         // table has 1 column
         expect(table.columns[0].name).toBe('index0'); // table has 'index0' column
@@ -199,7 +199,7 @@
 
       it('should generate N rows and 2 \'index0\', \'index1\' columns, for input [[\'Ron\', \'Swanson\'], [\'Leslie\', \'Knope\']]', function () {
         var
-          table = habular.asTable([['Ron', 'Swanson'], ['Leslie', 'Knope']]),
+          table = habular.table([['Ron', 'Swanson'], ['Leslie', 'Knope']]),
           index0Column = null,
           index1Column = null;
 
@@ -225,7 +225,7 @@
 
       it('should generate undefined cells where a value is not applicable, for input of object elements', function () {
         var
-          table = habular.asTable([{ fName: 'Ron' }, { lName: 'Knope' }]),
+          table = habular.table([{ fName: 'Ron' }, { lName: 'Knope' }]),
           fNameColumn = null,
           lNameColumn = null;
 
@@ -244,7 +244,7 @@
 
       it('should generate undefined cells where a value is not applicable, for input of array elements', function () {
         var
-          table = habular.asTable([['Ron'], ['Leslie', 'Knope']]),
+          table = habular.table([['Ron'], ['Leslie', 'Knope']]),
           index0Column = null,
           index1Column = null;
 
@@ -263,7 +263,7 @@
 
       it('should generate undefined cells where a value is not applicable, for input of mixed-type elements', function () {
         var
-          table = habular.asTable([{name: 'Ron'}, ['Leslie'], 42]),
+          table = habular.table([{name: 'Ron'}, ['Leslie'], 42]),
           nameColumn = null,
           index0Column = null,
           primitiveColumn = null;
@@ -295,7 +295,7 @@
 
       it('should not confuse columns, for input of {indexN: ... } and array', function () {
         var
-          table = habular.asTable([{ index0: 'Ron' }, ['Knope' ]]),
+          table = habular.table([{ index0: 'Ron' }, ['Knope' ]]),
           sources = null;
 
         expect(table.columns.length).toBe(2); // 'table has 2 columns
@@ -307,7 +307,7 @@
 
       it('should not confuse columns, for input of {primitive: ...} and primitive', function () {
         var
-          table = habular.asTable([{ primitive: 'Ron' }, 0]),
+          table = habular.table([{ primitive: 'Ron' }, 0]),
           sources = null;
 
         expect(table.columns.length).toBe(2); // table has 2 columns
@@ -323,28 +323,28 @@
     describe('in respect to generated cell value', function () {
 
       it('should generate column with cell of value 42, for input [{ answer: 42 }]', function () {
-        var table = habular.asTable([{ answer: 42 }]);
+        var table = habular.table([{ answer: 42 }]);
 
         expect(table.columns[0]).toBeDefined();           // table has column
         expect(table.columns[0].cells[0].value).toBe(42); // cell has value 42
       });
 
       it('should generate column with cell of value \'Ron Swanson\', for input [{ name: \'Ron Swanson\' }]', function () {
-        var table = habular.asTable([{ name: 'Ron Swanson' }]);
+        var table = habular.table([{ name: 'Ron Swanson' }]);
 
         expect(table.columns[0]).toBeDefined();                      // table has column
         expect(table.columns[0].cells[0].value).toBe('Ron Swanson'); // cell has value 'Ron Swanson'
       });
 
       it('should generate column with cell of value true, for input [{ isTested: true }]', function () {
-        var table = habular.asTable([{ isTested: true }]);
+        var table = habular.table([{ isTested: true }]);
 
         expect(table.columns[0]).toBeDefined();             // table has column
         expect(table.columns[0].cells[0].value).toBe(true); // cell has value true
       });
 
       it('should generate column with cell of value null, for input [{ bogus: null }]', function () {
-        var table = habular.asTable([{ bogus: null }]);
+        var table = habular.table([{ bogus: null }]);
 
         expect(table.columns[0]).toBeDefined();             // table has column
         expect(table.columns[0].cells[0].value).toBe(null); // cell has value null
@@ -353,7 +353,7 @@
       it('should generate column with cell that has the original array as value, for input [{ stuff: [...] }]', function () {
         var
           theStuff = ['one', '2', 3],
-          table = habular.asTable([{ stuff: theStuff }]);
+          table = habular.table([{ stuff: theStuff }]);
 
         expect(table.columns[0]).toBeDefined();                 // table has column
         expect(table.columns[0].cells[0].value).toBe(theStuff); // cell has the original array as value
@@ -362,7 +362,7 @@
       it('should generate column with cell that has the original object as value, for input [{ things: {...} }]', function () {
         var
           theThings = {one: 'one', two: '2', three: 3},
-          table = habular.asTable([{ things: theThings }]);
+          table = habular.table([{ things: theThings }]);
 
         expect(table.columns[0]).toBeDefined();                  // table has column
         expect(table.columns[0].cells[0].value).toBe(theThings); // cell has the original object as value
@@ -374,43 +374,43 @@
     describe('in respect to generated metadata', function () {
 
       it('should set column source to \'objectProperty\', for input [{ cost: 0 }]', function () {
-        var table = habular.asTable([{ cost: 0 }]);
+        var table = habular.table([{ cost: 0 }]);
 
         expect(table.columns[0].source).toBe('objectProperty'); // column has source 'objectProperty'
       });
 
       it('should set column source to \'arrayElement\', for input [[0]]', function () {
-        var table = habular.asTable([[0]]);
+        var table = habular.table([[0]]);
 
         expect(table.columns[0].source).toBe('arrayElement'); // column has source 'arrayElement'
       });
 
       it('should set column source to \'primitive\', for input [0]', function () {
-        var table = habular.asTable([0]);
+        var table = habular.table([0]);
 
         expect(table.columns[0].source).toBe('primitive'); // column has source 'primitive'
       });
 
       it('should set cell type to \'number\', for input [{ answer: 42 }]', function () {
-        var table = habular.asTable([{ answer: 42 }]);
+        var table = habular.table([{ answer: 42 }]);
 
         expect(table.columns[0].cells[0].type).toBe('number'); // cell has type 'number'
       });
 
       it('should set cell type to \'string\', for input [{ name: \'Ron Swanson\' }]', function () {
-        var table = habular.asTable([{ name: 'Ron Swanson' }]);
+        var table = habular.table([{ name: 'Ron Swanson' }]);
 
         expect(table.columns[0].cells[0].type).toBe('string'); // cell has type 'string'
       });
 
       it('should set cell type to \'boolean\', for input [{ isTested: true }]', function () {
-        var table = habular.asTable([{ isTested: true }]);
+        var table = habular.table([{ isTested: true }]);
 
         expect(table.columns[0].cells[0].type).toBe('boolean'); // cell has type 'boolean'
       });
 
       it('should set cell type to \'null\', for input [{ bogus: null }]', function () {
-        var table = habular.asTable([{ bogus: null }]);
+        var table = habular.table([{ bogus: null }]);
 
         expect(table.columns[0].cells[0].type).toBe('null'); // cell has type 'null'
       });
@@ -418,7 +418,7 @@
       it('should set cell type to \'array\', for input [{ stuff: [...] }]', function () {
         var
           theStuff = ['one', '2', 3],
-          table = habular.asTable([{ stuff: theStuff }]);
+          table = habular.table([{ stuff: theStuff }]);
 
         expect(table.columns[0].cells[0].type).toBe('array'); // cell has type 'array'
       });
@@ -426,7 +426,7 @@
       it('should set cell type to \'object\', for input [{ things: {...} }]', function () {
         var
           theThings = {one: 'one', two: '2', three: 3},
-          table = habular.asTable([{ things: theThings }]);
+          table = habular.table([{ things: theThings }]);
 
         expect(table.columns[0].cells[0].type).toBe('object'); // cell has type 'object'
       });
@@ -453,12 +453,12 @@
           ];
 
         for (i = f.length - 1; i >= 0; --i) {
-          table = habular.asTable(f[i]);
+          table = habular.table(f[i]);
           expect(table.columns[0].isExpandable).toBe(true);
         }
 
         for (i = n.length - 1; i >= 0; --i) {
-          table = habular.asTable(n[i]);
+          table = habular.table(n[i]);
           expect(table.columns[0].isExpandable).toBe(false);
         }
 
@@ -470,7 +470,7 @@
     describe('in respect to helper methods', function() {
 
       it('should implement access to specific rows', function() {
-        var table = habular.asTable([{cost: 0}, [0], 0]);
+        var table = habular.table([{cost: 0}, [0], 0]);
 
         expect(table.getRow(0)).toEqual([table.columns[0].cells[0], table.columns[1].cells[0], table.columns[2].cells[0]]);
         expect(table.getRow(1)).toEqual([table.columns[0].cells[1], table.columns[1].cells[1], table.columns[2].cells[1]]);

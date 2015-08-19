@@ -49,9 +49,6 @@
   var
 
     //
-    table = null,
-
-    //
     getType = function (value) {
       if (_.isNumber(value))  { return 'number'; }
       if (_.isString(value))  { return 'string'; }
@@ -79,14 +76,14 @@
 
     // Append a row, generated from an object. The object's keys will function as table columns.
     //  Such columns will be created for any key for which a column doesn't already exist
-    appendObjectRepresentationToTable = function (object, rowIndex) {
+    appendObjectRepresentationToTable = function (object, rowIndex, columns) {
       _(object).each(function (value, key) {
         var
-          column = _(table.columns).find(function (column) {
+          column = _(columns).find(function (column) {
             return column.name === key && column.source === 'objectProperty';
           }),
           cell = convertToCell(value);
-        column || table.columns.push(column = createColumn(key, 'objectProperty'));
+        column || columns.push(column = createColumn(key, 'objectProperty'));
         column.cells[rowIndex] = cell;
         column.isExpandable ||
           (column.isExpandable = cell.type === 'object' || cell.type === 'array');
@@ -96,15 +93,15 @@
     // Append a row generated from an array. The array's indices will function as table columns.
     //  That is to say, for each array index n, a column named 'index:n' will be appended to the
     //  table, if it doesn't already exist
-    appendArrayRepresentationToTable = function (array, rowIndex) {
+    appendArrayRepresentationToTable = function (array, rowIndex, columns) {
       _(array).each(function (element, index) {
         var
           key = 'index' + index,
-          column = _(table.columns).find(function (column) {
+          column = _(columns).find(function (column) {
             return column.name === key && column.source === 'arrayElement';
           }),
           cell = convertToCell(element);
-        column || table.columns.push(column = createColumn(key, 'arrayElement'));
+        column || columns.push(column = createColumn(key, 'arrayElement'));
         column.cells[rowIndex] = cell;
         column.isExpandable ||
           (column.isExpandable = cell.type === 'object' || cell.type === 'array');
@@ -114,41 +111,58 @@
     // Append a row generated from a single primitive value. This row will naturally contain a
     //  single cell belonging to column 'primitive'. The latter will be appended to the table
     //  if it doesn't already exist
-    appendPrimitiveRepresentationToTable = function (primitive, rowIndex) {
+    appendPrimitiveRepresentationToTable = function (primitive, rowIndex, columns) {
       var
-        column = _(table.columns).find(function (column) {
+        column = _(columns).find(function (column) {
           // There can be only one primitive-sourced column
           return column.source === 'primitive';
         }),
         cell = convertToCell(primitive);
-      column || table.columns.push(column = createColumn('primitive', 'primitive'));
+      column || columns.push(column = createColumn('primitive', 'primitive'));
       column.cells[rowIndex] = cell;
-    };
+    },
 
-  // Return the habular
+    //
+    HabularTable = (function () {
+
+      var HabularTable = function (array) {
+
+        this.columns = [];
+        this.numOfRows = array.length;
+
+        _(array).each(function (element, index) {
+          (function () {
+            if (_.isArray(element)) { return appendArrayRepresentationToTable; }
+            if (_.isObject(element)) { return appendObjectRepresentationToTable; }
+            return appendPrimitiveRepresentationToTable;
+          }())(element, index, this.columns);
+        }, this);
+      };
+
+      _(HabularTable.prototype).extend({
+        getNumOfRows: function () {
+          return this.numOfRows;
+        },
+        getRow: function (index) {
+          return _(this.columns).map(function (column) {
+            return column.cells[index];
+          });
+        }
+      });
+
+      return HabularTable;
+    }());
+
+  // Return the habular object. It exposes the `Table` constructor as well as the equivalent
+  //  `table` convenience method
   return _.extend(habular, {
 
     //
-    asTable: function (array) {
-      table = { columns: [] };
+    Table: HabularTable,
 
-      _(array).each(function (element, index) {
-        (function () {
-          if (_.isArray(element)) { return appendArrayRepresentationToTable; }
-          if (_.isObject(element)) { return appendObjectRepresentationToTable; }
-          return appendPrimitiveRepresentationToTable;
-        }())(element, index);
-      });
-
-      table.getNumOfRows = (function (numOfRows) {
-        return function () { return numOfRows; };
-      }(array.length));
-
-      table.getRow = function (index) {
-        return _(table.columns).map(function (column) { return column.cells[index]; });
-      };
-
-      return table;
+    //
+    table: function (array) {
+      return new HabularTable(array);
     }
 
   });
