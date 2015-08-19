@@ -64,7 +64,7 @@
     // A value is converted into a table cell, a hash which contains the value itself as well
     //  as the value's type
     convertToCell = function (value) {
-      return {value: value, type: getType(value)};
+      return { value: value, type: getType(value) };
     },
 
     // Create column of specified name and source

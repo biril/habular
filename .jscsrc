@@ -28,6 +28,7 @@
   "requireSpaceAfterBinaryOperators": true,
   "requireSpaceAfterLineComment": true,
   "requireCamelCaseOrUpperCaseIdentifiers": true,
+  "requireSpacesInsideObjectBrackets": "all",
   "requireLineFeedAtFileEnd": true,
   "requireCapitalizedConstructors": true,
   "requireDotNotation": true,
