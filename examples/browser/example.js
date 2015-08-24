@@ -15,11 +15,14 @@
       $jsonInputFormInput = $jsonInputForm.find('input'),
       $useExampleButton = $jsonInputForm.find('.useExampleButton'),
       $tableOutput = $('.tableOutput'),
+
       buildHtmlTable = function (table) {
         var
-          $table = $tableOutput.empty().html('<table><thead><tr></tr><thead><tbody></tbody></table>').find('table'),
+          tableMarkup = '<table><thead><tr></tr><thead><tbody></tbody></table>',
+          $table = $tableOutput.empty().html(tableMarkup).find('table'),
           $tableBody = $table.find('tbody'),
           i, numOfRows,
+
           buildHtmlCell = function (cell) {
             var displayValue, htmlClass;
             if (_.isUndefined(cell)) {
@@ -29,10 +32,21 @@
             displayValue = cell.value;
             htmlClass = cell.type;
             switch (cell.type) {
-              case 'null': displayValue = 'null'; break;
-              case 'object': displayValue = 'object'; break;
-              case 'array': displayValue = 'array'; break;
-              case 'boolean': htmlClass += (cell.value ? ' true' : ' false');
+              case 'null': {
+                displayValue = 'null';
+                break;
+              }
+              case 'object': {
+                displayValue = 'object';
+                break;
+              }
+              case 'array': {
+                displayValue = 'array';
+                break;
+              }
+              case 'boolean': {
+                htmlClass += (cell.value ? ' true' : ' false');
+              }
             }
 
             displayValue = truncate(displayValue, 25);
@@ -44,7 +58,8 @@
           return '<th ' + (c.isExpandable ? 'class="expandable"' : '') + '>' + c.name + '</th>';
         }).join(''));
 
-        for(i = 0, numOfRows = table.getNumOfRows(); i < numOfRows; ++i) {
+        numOfRows = table.getNumOfRows();
+        for (i = 0; i < numOfRows; ++i) {
           $tableBody.append('<tr>' + _(table.getRow(i)).map(buildHtmlCell).join('') + '</tr>');
         }
       };
