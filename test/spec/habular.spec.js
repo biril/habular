@@ -1,4 +1,5 @@
 /*global exports, define, require, __dirname, describe, it, expect, _, habular */
+/*jscs: disable maximumLineLength */
 
 (function (runTests) {
 
