@@ -44,8 +44,9 @@
         expect(table.columns.length).toBe(0); // table has 0 columns
       });
 
-    }); //
+    }); // When input is empty
 
+    // ----------------
 
     describe('when input contains a single element', function () {
 
@@ -120,6 +121,7 @@
 
     }); // when input contains a single element
 
+    // ----------------
 
     describe('when input contains N empty elements', function () {
 
@@ -147,6 +149,7 @@
 
     }); // when input contains N empty elements
 
+    // ----------------
 
     describe('when input contains N non-empty elements', function () {
 
@@ -221,6 +224,7 @@
 
     }); // when input contains N non-empty elements
 
+    // ----------------
 
     describe('when input is non-uniform', function () {
 
@@ -264,7 +268,7 @@
 
       it('should generate undefined cells where a value is not applicable, for input of mixed-type elements', function () {
         var
-          table = habular.table([{name: 'Ron'}, ['Leslie'], 42]),
+          table = habular.table([{ name: 'Ron' }, ['Leslie'], 42]),
           nameColumn = null,
           index0Column = null,
           primitiveColumn = null;
@@ -291,12 +295,13 @@
 
     }); // when input is non-uniform
 
+    // ----------------
 
     describe('when input causes column-name clashes', function() {
 
       it('should not confuse columns, for input of {indexN: ... } and array', function () {
         var
-          table = habular.table([{ index0: 'Ron' }, ['Knope' ]]),
+          table = habular.table([{ index0: 'Ron' }, ['Knope']]),
           sources = null;
 
         expect(table.columns.length).toBe(2); // 'table has 2 columns
@@ -320,6 +325,7 @@
 
     }); // when input causes column-name clashes
 
+    // ----------------
 
     describe('in respect to generated cell value', function () {
 
@@ -362,7 +368,7 @@
 
       it('should generate column with cell that has the original object as value, for input [{ things: {...} }]', function () {
         var
-          theThings = {one: 'one', two: '2', three: 3},
+          theThings = { one: 'one', two: '2', three: 3 },
           table = habular.table([{ things: theThings }]);
 
         expect(table.columns[0]).toBeDefined();                  // table has column
@@ -371,6 +377,7 @@
 
     }); // in respect to generated cell value
 
+    // ----------------
 
     describe('in respect to generated metadata', function () {
 
@@ -426,7 +433,7 @@
 
       it('should set cell type to \'object\', for input [{ things: {...} }]', function () {
         var
-          theThings = {one: 'one', two: '2', three: 3},
+          theThings = { one: 'one', two: '2', three: 3 },
           table = habular.table([{ things: theThings }]);
 
         expect(table.columns[0].cells[0].type).toBe('object'); // cell has type 'object'
@@ -439,18 +446,19 @@
 
           // inputs that should be converted into 'c'-column-expandable tables
           f = [
-            [{c: {}}],         // columns of object-cells are expandable
-            [{c: []}],         // columns of array-cells are expandable
-            [{c: 0}, {c: {}}], // columns which contain at least one object- ..
-            [{c: 0}, {c: []}]  // .. or array-cell are expandable
+            [{ c: {} }],           // columns of object-cells are expandable
+            [{ c: [] }],           // columns of array-cells are expandable
+            [{ c: 0 }, { c: {} }], // columns which contain at least one object- ..
+            [{ c: 0 }, { c: [] }]  // .. or array-cell are expandable
           ],
 
           // inputs that should be converted into non-'c'-column-expandable tables
-          n = [ // columns that only contain primitive values are non-expandable
-            [{c: 42}],
-            [{c: 'Ron Swanson'}],
-            [{c: true}],
-            [{c: null}]
+          // (columns that only contain primitive values are non-expandable)
+          n = [
+            [{ c: 42 }],
+            [{ c: 'Ron Swanson' }],
+            [{ c: true }],
+            [{ c: null }]
           ];
 
         for (i = f.length - 1; i >= 0; --i) {
@@ -467,11 +475,12 @@
 
     }); // in respect to generated metadata
 
+    // ----------------
 
     describe('in respect to helper methods', function() {
 
       it('should implement access to specific rows', function() {
-        var table = habular.table([{cost: 0}, [0], 0]);
+        var table = habular.table([{ cost: 0 }, [0], 0]);
 
         expect(table.getRow(0)).toEqual([table.columns[0].cells[0], table.columns[1].cells[0], table.columns[2].cells[0]]);
         expect(table.getRow(1)).toEqual([table.columns[0].cells[1], table.columns[1].cells[1], table.columns[2].cells[1]]);
