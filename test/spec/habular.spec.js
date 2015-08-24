@@ -72,8 +72,8 @@
           hColumn = null;
 
         expect(table.columns.length).toBe(2); // table has 2 columns
-        expect(wColumn = _(table.columns).find(function (column) { return column.name === 'width'; })).toBeDefined();  // table has a 'width' column
-        expect(hColumn = _(table.columns).find(function (column) { return column.name === 'height'; })).toBeDefined(); // table has a 'height' column
+        expect(wColumn = _(table.columns).findWhere({ name: 'width' })).toBeDefined();
+        expect(hColumn = _(table.columns).findWhere({ name: 'height' })).toBeDefined();
         expect(table.getNumOfRows()).toBe(1); // table reports 1 row
         expect(wColumn.cells.length).toBe(1); // 'width' column has one row
         expect(hColumn.cells.length).toBe(1); // 'height' column has one row
@@ -102,8 +102,8 @@
           index1Column = null;
 
         expect(table.columns.length).toBe(2); // table has 2 columns
-        expect(index0Column = _(table.columns).find(function (column) { return column.name === 'index0'; })).toBeDefined(); // table has a 'index0' column
-        expect(index1Column = _(table.columns).find(function (column) { return column.name === 'index1'; })).toBeDefined(); // table has a 'index1' column
+        expect(index0Column = _(table.columns).findWhere({ name: 'index0' })).toBeDefined();
+        expect(index1Column = _(table.columns).findWhere({ name: 'index1' })).toBeDefined();
         expect(table.getNumOfRows()).toBe(1);      // table reports 1 row
         expect(index0Column.cells.length).toBe(1); // 'index0' column has 1 row
         expect(index1Column.cells.length).toBe(1); // 'index1' column has 1 row
@@ -172,8 +172,8 @@
           lNameColumn = null;
 
         expect(table.columns.length).toBe(2); // table has 2 columns
-        expect(fNameColumn = _(table.columns).find(function (column) { return column.name === 'fName'; })).toBeDefined(); // table has 'fName' column
-        expect(lNameColumn = _(table.columns).find(function (column) { return column.name === 'lName'; })).toBeDefined(); // table has 'lName' column
+        expect(fNameColumn = _(table.columns).findWhere({ name: 'fName' })).toBeDefined(); // table has 'fName' column
+        expect(lNameColumn = _(table.columns).findWhere({ name: 'lName' })).toBeDefined(); // table has 'lName' column
 
         expect(table.getNumOfRows()).toBe(2);     // table reports 2 rows
         expect(fNameColumn.cells.length).toBe(2); // 'fName' column has two cells
@@ -205,8 +205,8 @@
           index1Column = null;
 
         expect(table.columns.length).toBe(2); // table has 2 columns
-        expect(index0Column = _(table.columns).find(function (column) { return column.name === 'index0'; })).toBeDefined(); // table has 'index0' column
-        expect(index1Column = _(table.columns).find(function (column) { return column.name === 'index1'; })).toBeDefined(); // table has 'index1' column
+        expect(index0Column = _(table.columns).findWhere({ name: 'index0' })).toBeDefined(); // table has 'index0' column
+        expect(index1Column = _(table.columns).findWhere({ name: 'index1' })).toBeDefined(); // table has 'index1' column
 
         expect(table.getNumOfRows()).toBe(2);      // table reports 2 rows
         expect(index0Column.cells.length).toBe(2); // 'index0' column has two cells
@@ -231,8 +231,8 @@
           lNameColumn = null;
 
         expect(table.columns.length).toBe(2); // table has 2 columns
-        expect(fNameColumn = _(table.columns).find(function (column) { return column.name === 'fName'; })).toBeDefined(); // table has 'fName' column
-        expect(lNameColumn = _(table.columns).find(function (column) { return column.name === 'lName'; })).toBeDefined(); // table has 'lName' column
+        expect(fNameColumn = _(table.columns).findWhere({ name: 'fName' })).toBeDefined(); // table has 'fName' column
+        expect(lNameColumn = _(table.columns).findWhere({ name: 'lName' })).toBeDefined(); // table has 'lName' column
 
         expect(table.getNumOfRows()).toBe(2); // table reports 2 rows
 
@@ -250,8 +250,8 @@
           index1Column = null;
 
         expect(table.columns.length).toBe(2); // table has 2 columns
-        expect(index0Column = _(table.columns).find(function (column) { return column.name === 'index0'; })).toBeDefined(); // table has 'index0' column
-        expect(index1Column = _(table.columns).find(function (column) { return column.name === 'index1'; })).toBeDefined(); // table has 'index1' column
+        expect(index0Column = _(table.columns).findWhere({ name: 'index0' })).toBeDefined(); // table has 'index0' column
+        expect(index1Column = _(table.columns).findWhere({ name: 'index1' })).toBeDefined(); // table has 'index1' column
 
         expect(table.getNumOfRows()).toBe(2); // table reports 2 rows
 
@@ -270,9 +270,9 @@
           primitiveColumn = null;
 
         expect(table.columns.length).toBe(3); // table reports 3 columns
-        expect(nameColumn = _(table.columns).find(function (column) { return column.name === 'name'; })).toBeDefined();           // table has 'name' column
-        expect(index0Column = _(table.columns).find(function (column) { return column.name === 'index0'; })).toBeDefined();       // table has 'index0' column
-        expect(primitiveColumn = _(table.columns).find(function (column) { return column.name === 'primitive'; })).toBeDefined(); // table has 'primitive' column
+        expect(nameColumn = _(table.columns).findWhere({ name: 'name' })).toBeDefined();           // table has 'name' column
+        expect(index0Column = _(table.columns).findWhere({ name: 'index0' })).toBeDefined();       // table has 'index0' column
+        expect(primitiveColumn = _(table.columns).findWhere({ name: 'primitive' })).toBeDefined(); // table has 'primitive' column
 
         expect(table.getNumOfRows()).toBe(3); // table reports 3 rows
 
